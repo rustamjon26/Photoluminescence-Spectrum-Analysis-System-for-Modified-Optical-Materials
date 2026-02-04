@@ -14,7 +14,7 @@ import type {
 export function savitzkyGolayFilter(
   data: SpectralDataPoint[],
   windowLength: number,
-  polynomialOrder: number,
+  _polynomialOrder: number,
 ): SpectralDataPoint[] {
   // Ensure window length is odd
   if (windowLength % 2 === 0) windowLength += 1;

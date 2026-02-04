@@ -1,11 +1,11 @@
-import Dashboard from "./pages/Dashboard";
-import ImportPage from "./pages/ImportPage";
-import PreprocessPage from "./pages/PreprocessPage";
-import AnalysisPage from "./pages/AnalysisPage";
-import ComparePage from "./pages/ComparePage";
-import ReportsPage from "./pages/ReportsPage";
-import ExperimentPage from "./pages/ExperimentPage";
-import NotFound from "./pages/NotFound"; // YANGI QATOR
+import Dashboard from "../pages/Dashboard";
+import ImportPage from "../pages/ImportPage";
+import PreprocessPage from "../pages/PreprocessPage";
+import AnalysisPage from "../pages/AnalysisPage";
+import ComparePage from "../pages/ComparePage";
+import ReportsPage from "../pages/ReportsPage";
+import ExperimentPage from "../pages/ExperimentPage";
+import NotFound from "../pages/NotFound";
 import type { ReactNode } from "react";
 
 interface RouteConfig {

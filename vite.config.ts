@@ -8,7 +8,7 @@ import path from "path";
 export default defineConfig({
   plugins: [
     react(),
-    miaodaDevPlugin(),
+    miaodaDevPlugin() as any,
     svgr({
       svgrOptions: {
         icon: true,

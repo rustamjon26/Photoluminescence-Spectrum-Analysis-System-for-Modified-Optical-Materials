@@ -1,30 +1,29 @@
-import { useEffect, useState } from 'react';
-import { useParams } from 'react-router';
-import { Plus, TrendingUp } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { ComparisonChart } from '@/components/spectrum/ComparisonChart';
-import { getSample, getSamplesByExperiment, getSpectralData } from '@/db/api';
-import { useToast } from '@/hooks/use-toast';
-import type { Sample, SpectralDataPoint } from '@/types/spectrum';
-import { Skeleton } from '@/components/ui/skeleton';
+import { useEffect, useState } from "react";
+import { useParams } from "react-router";
+import { Plus, TrendingUp } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { ComparisonChart } from "@/components/spectrum/ComparisonChart";
+import { getSample, getSamplesByExperiment, getSpectralData } from "@/db/api";
+import { useToast } from "@/hooks/use-toast";
+import type { Sample, SpectralDataPoint } from "@/types/spectrum";
+import { Skeleton } from "@/components/ui/skeleton";
 import {
   Dialog,
   DialogContent,
   DialogDescription,
   DialogHeader,
   DialogTitle,
-  DialogTrigger
-} from '@/components/ui/dialog';
-import { Checkbox } from '@/components/ui/checkbox';
-import { Label } from '@/components/ui/label';
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Label } from "@/components/ui/label";
 
 export default function ComparePage() {
   const { sampleId } = useParams<{ sampleId: string }>();
   const { toast } = useToast();
 
   const [loading, setLoading] = useState(true);
-  const [currentSample, setCurrentSample] = useState<Sample | null>(null);
   const [availableSamples, setAvailableSamples] = useState<Sample[]>([]);
   const [selectedSamples, setSelectedSamples] = useState<string[]>([]);
   const [comparisonData, setComparisonData] = useState<
@@ -44,14 +43,12 @@ export default function ComparePage() {
       const sample = await getSample(sampleId!);
 
       if (!sample) {
-        throw new Error('Sample not found');
+        throw new Error("Sample not found");
       }
-
-      setCurrentSample(sample);
 
       // Load other samples from the same experiment
       const samples = await getSamplesByExperiment(sample.experiment_id);
-      const otherSamples = samples.filter(s => s.id !== sampleId);
+      const otherSamples = samples.filter((s) => s.id !== sampleId);
       setAvailableSamples(otherSamples);
 
       // Load current sample data
@@ -59,11 +56,11 @@ export default function ComparePage() {
       setComparisonData([{ sample, data: currentData }]);
       setSelectedSamples([sampleId!]);
     } catch (error) {
-      console.error('Failed to load data:', error);
+      console.error("Failed to load data:", error);
       toast({
-        title: 'Error loading data',
-        description: error instanceof Error ? error.message : 'Unknown error',
-        variant: 'destructive'
+        title: "Error loading data",
+        description: error instanceof Error ? error.message : "Unknown error",
+        variant: "destructive",
       });
     } finally {
       setLoading(false);
@@ -77,23 +74,23 @@ export default function ComparePage() {
           const sample = await getSample(id);
           const data = await getSpectralData(id);
           return { sample: sample!, data };
-        })
+        }),
       );
 
-      setComparisonData(prev => [...prev, ...newSamples]);
-      setSelectedSamples(prev => [...prev, ...sampleIds]);
+      setComparisonData((prev) => [...prev, ...newSamples]);
+      setSelectedSamples((prev) => [...prev, ...sampleIds]);
       setDialogOpen(false);
 
       toast({
-        title: 'Samples added',
-        description: `Added ${sampleIds.length} sample(s) for comparison`
+        title: "Samples added",
+        description: `Added ${sampleIds.length} sample(s) for comparison`,
       });
     } catch (error) {
-      console.error('Failed to add samples:', error);
+      console.error("Failed to add samples:", error);
       toast({
-        title: 'Error adding samples',
-        description: error instanceof Error ? error.message : 'Unknown error',
-        variant: 'destructive'
+        title: "Error adding samples",
+        description: error instanceof Error ? error.message : "Unknown error",
+        variant: "destructive",
       });
     }
   }
@@ -105,11 +102,13 @@ export default function ComparePage() {
     const sample2 = comparisonData[1];
 
     // Find peak positions
-    const peak1 = Math.max(...sample1.data.map(d => d.intensity));
-    const peak2 = Math.max(...sample2.data.map(d => d.intensity));
+    const peak1 = Math.max(...sample1.data.map((d) => d.intensity));
+    const peak2 = Math.max(...sample2.data.map((d) => d.intensity));
 
-    const peak1Wavelength = sample1.data.find(d => d.intensity === peak1)?.wavelength || 0;
-    const peak2Wavelength = sample2.data.find(d => d.intensity === peak2)?.wavelength || 0;
+    const peak1Wavelength =
+      sample1.data.find((d) => d.intensity === peak1)?.wavelength || 0;
+    const peak2Wavelength =
+      sample2.data.find((d) => d.intensity === peak2)?.wavelength || 0;
 
     const spectralShift = peak2Wavelength - peak1Wavelength;
     const intensityRatio = peak2 / peak1;
@@ -118,7 +117,7 @@ export default function ComparePage() {
       spectralShift,
       intensityRatio,
       peak1Wavelength,
-      peak2Wavelength
+      peak2Wavelength,
     };
   }
 
@@ -137,7 +136,9 @@ export default function ComparePage() {
     <div className="max-w-7xl mx-auto space-y-8">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-light tracking-tight">Sample Comparison</h1>
+          <h1 className="text-3xl font-light tracking-tight">
+            Sample Comparison
+          </h1>
           <p className="text-muted-foreground mt-2">
             Compare spectral characteristics across samples
           </p>
@@ -158,8 +159,8 @@ export default function ComparePage() {
             </DialogHeader>
             <div className="space-y-4 py-4">
               {availableSamples
-                .filter(s => !selectedSamples.includes(s.id))
-                .map(sample => (
+                .filter((s) => !selectedSamples.includes(s.id))
+                .map((sample) => (
                   <div key={sample.id} className="flex items-center space-x-2">
                     <Checkbox
                       id={sample.id}
@@ -179,8 +180,11 @@ export default function ComparePage() {
                     </Label>
                   </div>
                 ))}
-              {availableSamples.filter(s => !selectedSamples.includes(s.id)).length === 0 && (
-                <p className="text-sm text-muted-foreground">No more samples available</p>
+              {availableSamples.filter((s) => !selectedSamples.includes(s.id))
+                .length === 0 && (
+                <p className="text-sm text-muted-foreground">
+                  No more samples available
+                </p>
               )}
             </div>
           </DialogContent>
@@ -201,9 +205,11 @@ export default function ComparePage() {
             <CardContent>
               <div className="space-y-4">
                 <div>
-                  <p className="text-sm text-muted-foreground">Peak Shift (Δλ)</p>
+                  <p className="text-sm text-muted-foreground">
+                    Peak Shift (Δλ)
+                  </p>
                   <p className="text-3xl font-light">
-                    {comparison.spectralShift > 0 ? '+' : ''}
+                    {comparison.spectralShift > 0 ? "+" : ""}
                     {comparison.spectralShift.toFixed(2)} nm
                   </p>
                 </div>
@@ -212,13 +218,17 @@ export default function ComparePage() {
                     <p className="text-xs text-muted-foreground">
                       {comparisonData[0].sample.name}
                     </p>
-                    <p className="text-lg font-light">{comparison.peak1Wavelength.toFixed(2)} nm</p>
+                    <p className="text-lg font-light">
+                      {comparison.peak1Wavelength.toFixed(2)} nm
+                    </p>
                   </div>
                   <div>
                     <p className="text-xs text-muted-foreground">
                       {comparisonData[1].sample.name}
                     </p>
-                    <p className="text-lg font-light">{comparison.peak2Wavelength.toFixed(2)} nm</p>
+                    <p className="text-lg font-light">
+                      {comparison.peak2Wavelength.toFixed(2)} nm
+                    </p>
                   </div>
                 </div>
               </div>
@@ -227,24 +237,31 @@ export default function ComparePage() {
 
           <Card>
             <CardHeader>
-              <CardTitle className="text-lg font-medium">Intensity Change</CardTitle>
+              <CardTitle className="text-lg font-medium">
+                Intensity Change
+              </CardTitle>
             </CardHeader>
             <CardContent>
               <div className="space-y-4">
                 <div>
-                  <p className="text-sm text-muted-foreground">Intensity Ratio</p>
-                  <p className="text-3xl font-light">{comparison.intensityRatio.toFixed(3)}</p>
+                  <p className="text-sm text-muted-foreground">
+                    Intensity Ratio
+                  </p>
+                  <p className="text-3xl font-light">
+                    {comparison.intensityRatio.toFixed(3)}
+                  </p>
                 </div>
                 <div className="pt-4 border-t">
                   <p className="text-sm text-muted-foreground">
                     {comparison.intensityRatio > 1
-                      ? 'Luminescence Enhancement'
+                      ? "Luminescence Enhancement"
                       : comparison.intensityRatio < 1
-                        ? 'Luminescence Quenching'
-                        : 'No Change'}
+                        ? "Luminescence Quenching"
+                        : "No Change"}
                   </p>
                   <p className="text-lg font-light">
-                    {Math.abs((comparison.intensityRatio - 1) * 100).toFixed(1)}%
+                    {Math.abs((comparison.intensityRatio - 1) * 100).toFixed(1)}
+                    %
                   </p>
                 </div>
               </div>

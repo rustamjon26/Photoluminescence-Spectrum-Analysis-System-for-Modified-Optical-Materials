@@ -1,15 +1,32 @@
-import { SidebarProvider, Sidebar, SidebarContent, SidebarGroup, SidebarGroupContent, SidebarGroupLabel, SidebarMenu, SidebarMenuButton, SidebarMenuItem, SidebarTrigger } from '@/components/ui/sidebar';
-import { Home, Upload, Filter, LineChart, GitCompare, FileText } from 'lucide-react';
-import { Link, useLocation } from 'react-router';
-import { cn } from '@/lib/utils';
+import {
+  SidebarProvider,
+  Sidebar,
+  SidebarContent,
+  SidebarGroup,
+  SidebarGroupContent,
+  SidebarGroupLabel,
+  SidebarMenu,
+  SidebarMenuButton,
+  SidebarMenuItem,
+  SidebarTrigger,
+} from "@/components/ui/sidebar";
+import {
+  Home,
+  Upload,
+  Filter,
+  LineChart,
+  GitCompare,
+  FileText,
+} from "lucide-react";
+import { Link, useLocation } from "react-router";
 
 const navigation = [
-  { name: 'Dashboard', href: '/', icon: Home },
-  { name: 'Import Data', href: '/import', icon: Upload },
-  { name: 'Preprocess', href: '/preprocess', icon: Filter },
-  { name: 'Analysis', href: '/analysis', icon: LineChart },
-  { name: 'Compare', href: '/compare', icon: GitCompare },
-  { name: 'Reports', href: '/reports', icon: FileText }
+  { name: "Dashboard", href: "/", icon: Home },
+  { name: "Import Data", href: "/import", icon: Upload },
+  { name: "Preprocess", href: "/preprocess", icon: Filter },
+  { name: "Analysis", href: "/analysis", icon: LineChart },
+  { name: "Compare", href: "/compare", icon: GitCompare },
+  { name: "Reports", href: "/reports", icon: FileText },
 ];
 
 interface AppLayoutProps {
@@ -31,9 +48,11 @@ export function AppLayout({ children }: AppLayoutProps) {
               <SidebarGroupContent>
                 <SidebarMenu>
                   {navigation.map((item) => {
-                    const isActive = location.pathname === item.href || 
-                      (item.href !== '/' && location.pathname.startsWith(item.href));
-                    
+                    const isActive =
+                      location.pathname === item.href ||
+                      (item.href !== "/" &&
+                        location.pathname.startsWith(item.href));
+
                     return (
                       <SidebarMenuItem key={item.name}>
                         <SidebarMenuButton asChild isActive={isActive}>
@@ -57,9 +76,7 @@ export function AppLayout({ children }: AppLayoutProps) {
               <SidebarTrigger className="lg:hidden" />
             </div>
           </div>
-          <div className="p-8">
-            {children}
-          </div>
+          <div className="p-8">{children}</div>
         </main>
       </div>
     </SidebarProvider>

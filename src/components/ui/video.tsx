@@ -1,8 +1,8 @@
 /**
  * Video Player Component
- * 
+ *
  * Video player based on video-react wrapper, supports custom poster, autoplay, mute and other features
- * 
+ *
  * Usage example:
  * <Video
  *   src="" // Video resource URL, defaults to empty string
@@ -11,41 +11,46 @@
  */
 
 import {
-    BigPlayButton,
-    ControlBar,
-    PlayToggle,
-    CurrentTimeDisplay,
-    TimeDivider,
-    DurationDisplay,
-    FullscreenToggle,
-    VolumeMenuButton,
-    ProgressControl
-} from 'video-react';
-import 'video-react/dist/video-react.css';
+  Player,
+  BigPlayButton,
+  ControlBar,
+  PlayToggle,
+  CurrentTimeDisplay,
+  TimeDivider,
+  DurationDisplay,
+  FullscreenToggle,
+  VolumeMenuButton,
+  ProgressControl,
+} from "video-react";
+import "video-react/dist/video-react.css";
 
 interface VideoProps {
-    /** Video resource URL */
-src: string;
-poster?: string; /** Video poster image URL */
-className?: string; /** Custom class name */
-autoPlay?: boolean; /** Whether to autoplay, defaults to false */
-muted?: boolean; /** Whether to mute, defaults to false */
-controls?: boolean; /** Whether to show controls, defaults to true */
-aspectRatio?: string | 'auto' | '16:9' | '4:3'; /** Video aspect ratio, defaults to 'auto' */
+  /** Video resource URL */
+  src: string;
+  poster?: string; /** Video poster image URL */
+  className?: string; /** Custom class name */
+  autoPlay?: boolean; /** Whether to autoplay, defaults to false */
+  muted?: boolean; /** Whether to mute, defaults to false */
+  controls?: boolean; /** Whether to show controls, defaults to true */
+  aspectRatio?:
+    | string
+    | "auto"
+    | "16:9"
+    | "4:3"; /** Video aspect ratio, defaults to 'auto' */
 }
 
 export default function Video({
-className,
-src,
-poster,
-autoPlay = false,
-muted = false,
-controls = true,
-aspectRatio = 'auto'
+  className,
+  src,
+  poster,
+  autoPlay = false,
+  muted = false,
+  controls = true,
+  aspectRatio = "auto",
 }: VideoProps) {
-return (
+  return (
     <div className={`min-w-[100px] ${className}`} custom-component="video">
-    <style>
+      <style>
         {`
 .video-react-paused .video-react-big-play-button.big-play-button-hide {
     display: block;
@@ -83,29 +88,29 @@ display: block;
     aspect-ratio: 16 / 9;
 }
 `}
-    </style>
-    <Player
+      </style>
+      <Player
         poster={poster}
         src={src}
         autoPlay={autoPlay}
         muted={muted}
         aspectRatio={aspectRatio}
-    >
+      >
         <ControlBar
-        disableDefaultControls
-        autoHide
-        disableCompletely={!controls}
+          disableDefaultControls
+          autoHide
+          disableCompletely={!controls}
         >
-        <PlayToggle key="play-toggle" />
-        <VolumeMenuButton key="volume-menu-button" vertical />
-        <CurrentTimeDisplay key="current-time-display" />
-        <TimeDivider key="time-divider" />
-        <DurationDisplay key="duration-display" />
-        <ProgressControl key="progress-control" />
-        <FullscreenToggle key="fullscreen-toggle" />
+          <PlayToggle key="play-toggle" />
+          <VolumeMenuButton key="volume-menu-button" vertical />
+          <CurrentTimeDisplay key="current-time-display" />
+          <TimeDivider key="time-divider" />
+          <DurationDisplay key="duration-display" />
+          <ProgressControl key="progress-control" />
+          {(FullscreenToggle as any)({ key: "fullscreen-toggle" })}
         </ControlBar>
         <BigPlayButton position="center" />
-    </Player>
+      </Player>
     </div>
-);
+  );
 }
