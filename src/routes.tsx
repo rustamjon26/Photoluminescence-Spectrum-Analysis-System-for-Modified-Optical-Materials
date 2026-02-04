@@ -1,4 +1,10 @@
-import SamplePage from './pages/SamplePage';
+import Dashboard from './pages/Dashboard';
+import ImportPage from './pages/ImportPage';
+import PreprocessPage from './pages/PreprocessPage';
+import AnalysisPage from './pages/AnalysisPage';
+import ComparePage from './pages/ComparePage';
+import ReportsPage from './pages/ReportsPage';
+import ExperimentPage from './pages/ExperimentPage';
 import type { ReactNode } from 'react';
 
 interface RouteConfig {
@@ -10,9 +16,39 @@ interface RouteConfig {
 
 const routes: RouteConfig[] = [
   {
-    name: 'Sample Page',
+    name: 'Dashboard',
     path: '/',
-    element: <SamplePage />
+    element: <Dashboard />
+  },
+  {
+    name: 'Import Data',
+    path: '/import',
+    element: <ImportPage />
+  },
+  {
+    name: 'Experiment',
+    path: '/experiment/:experimentId',
+    element: <ExperimentPage />
+  },
+  {
+    name: 'Preprocess',
+    path: '/preprocess/:sampleId',
+    element: <PreprocessPage />
+  },
+  {
+    name: 'Analysis',
+    path: '/analysis/:sampleId',
+    element: <AnalysisPage />
+  },
+  {
+    name: 'Compare',
+    path: '/compare/:sampleId',
+    element: <ComparePage />
+  },
+  {
+    name: 'Reports',
+    path: '/reports',
+    element: <ReportsPage />
   }
 ];
 
