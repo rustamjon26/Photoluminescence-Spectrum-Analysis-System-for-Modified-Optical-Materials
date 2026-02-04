@@ -1,0 +1,25 @@
+src/components/layouts/AppLayout.tsx(4,1): error TS6133: 'cn' is declared but its value is never read.
+src/components/routes.tsx(1,23): error TS2307: Cannot find module './pages/Dashboard' or its corresponding type declarations.
+src/components/routes.tsx(2,24): error TS2307: Cannot find module './pages/ImportPage' or its corresponding type declarations.
+src/components/routes.tsx(3,28): error TS2307: Cannot find module './pages/PreprocessPage' or its corresponding type declarations.
+src/components/routes.tsx(4,26): error TS2307: Cannot find module './pages/AnalysisPage' or its corresponding type declarations.
+src/components/routes.tsx(5,25): error TS2307: Cannot find module './pages/ComparePage' or its corresponding type declarations.
+src/components/routes.tsx(6,25): error TS2307: Cannot find module './pages/ReportsPage' or its corresponding type declarations.
+src/components/routes.tsx(7,28): error TS2307: Cannot find module './pages/ExperimentPage' or its corresponding type declarations.
+src/components/routes.tsx(8,22): error TS2307: Cannot find module './pages/NotFound' or its corresponding type declarations.
+src/components/ui/map-cn.tsx(142,5): error TS18047: 'map' is possibly 'null'.
+src/components/ui/map-cn.tsx(150,5): error TS18047: 'map' is possibly 'null'.
+src/components/ui/map-cn.tsx(154,5): error TS18047: 'map' is possibly 'null'.
+src/components/ui/qrcodedataurl.tsx(15,20): error TS7016: Could not find a declaration file for module 'qrcode'. 'D:/.vscode/Photoluminescence Spectrum Analysis System for Modified Optical Materials/node_modules/.pnpm/qrcode@1.5.4/node_modules/qrcode/lib/index.js' implicitly has an 'any' type.
+  Try `npm i --save-dev @types/qrcode` if it exists or add a new declaration (.d.ts) file containing `declare module 'qrcode';`
+src/components/ui/video.tsx(87,6): error TS2304: Cannot find name 'Player'.
+src/components/ui/video.tsx(105,10): error TS2741: Property 'actions' is missing in type '{ key: string; }' but required in type 'FullScreenToggleProps'.
+src/components/ui/video.tsx(108,7): error TS2304: Cannot find name 'Player'.
+src/pages/ComparePage.tsx(27,10): error TS6133: 'currentSample' is declared but its value is never read.
+src/utils/fileParser.ts(3,18): error TS7016: Could not find a declaration file for module 'papaparse'. 'D:/.vscode/Photoluminescence Spectrum Analysis System for Modified Optical Materials/node_modules/.pnpm/papaparse@5.5.3/node_modules/papaparse/papaparse.js' implicitly has an 'any' type.
+  Try `npm i --save-dev @types/papaparse` if it exists or add a new declaration (.d.ts) file containing `declare module 'papaparse';`
+src/utils/fileParser.ts(13,18): error TS7006: Parameter 'results' implicitly has an 'any' type.
+src/utils/fileParser.ts(24,15): error TS7006: Parameter 'error' implicitly has an 'any' type.
+src/utils/pdfGenerator.ts(5,23): error TS6196: 'Peak' is declared but never used.
+src/utils/pdfGenerator.ts(5,29): error TS6196: 'FittingResult' is declared but never used.
+src/utils/scientific.ts(17,3): error TS6133: 'polynomialOrder' is declared but its value is never read.
